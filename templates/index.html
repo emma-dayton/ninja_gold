@@ -8,24 +8,74 @@
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Your Gold: {{session['gold']}}
-      <form action="/process_money" method="post">
-        <input type="hidden" name="building" value="farm" />
-        <input type="submit" value="Find Gold!"/>
-      </form>
-      <form action="/process_money" method="post">
-        <input type="hidden" name="building" value="cave" />
-        <input type="submit" value="Find Gold!"/>
-      </form>
-      <form action="/process_money" method="post">
-        <input type="hidden" name="building" value="house" />
-        <input type="submit" value="Find Gold!"/>
-      </form>
-      <form action="/process_money" method="post">
-        <input type="hidden" name="building" value="casino" />
-        <input type="submit" value="Find Gold!"/>
-      </form>
-
+      <div class="jumbotron">
+        <h1>Ninja Gold</h1>
+      </div>
+      <h5>Your Gold: {{session['gold']}}</h5>
+      <h4>You have {{session['count']}} attempts</h4>
+      <div class="row">
+        <div class="col-sm">
+          <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+              <h3>Farm</h3>
+            </div>
+            <div class="card-body">
+              <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="farm" />
+                <input type="submit" value="Find Gold!"/>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+              <h3>Cave</h3>
+            </div>
+            <div class="card-body">
+              <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="cave" />
+                <input type="submit" value="Find Gold!"/>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+              <h3>House</h3>
+            </div>
+            <div class="card-body">
+              <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="house" />
+                <input type="submit" value="Find Gold!"/>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+              <h3>Casino</h3>
+            </div>
+            <div class="card-body">
+              <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="casino" />
+                <input type="submit" value="Find Gold!"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card text-black bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header">
+        <ul class="list-group list-group-flush">
+        {% for x in session['log'] %}
+          <li class="list-group-item">{{ x }}</li>
+        {% endfor %}
+        </ul>
+      </div>
     </div>
   </body>
 </html>
