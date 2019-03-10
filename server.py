@@ -11,7 +11,7 @@ def index():
     if 'gold' not in session:
         session['gold'] = 0
     if 'count' not in session:
-        session['count'] = 25
+        session['count'] = 15
     if 'log' not in session:
         session['log'] = []
     return render_template("index.html")
@@ -21,14 +21,14 @@ def process_money():
     print(request.form)
     if session['count'] > 0:
         if request.form['building'] == 'farm':
-            gold = randint(8,13)
+            gold = randint(10,13)
             session['gold'] += gold
         elif request.form['building'] == 'cave':
-            gold = randint(0,30)
+            gold = randint(0,40)
             session['gold'] += gold
             session['count'] -= randint(1, 10)
         elif request.form['building'] == 'house':
-            gold = randint(3,15)
+            gold = randint(3,20)
             session['gold'] += gold
         elif request.form['building'] == 'casino':
             gold = randint(-50, 50)
@@ -42,14 +42,14 @@ def process_money():
         elif gold < 0:
             activity = 'Lost ' + str(gold * -1) + " pieces of gold at the " + request.form['building'] + f" ({time})"
         session['log'].append(activity)
-    for x in session['log']:
-        print(x)
     return redirect('/')
 
-@app.route('/endgame', methods=['POST'])
+@app.route('/endgame')
 def endgame():
-    message = "Your final Gold tally: " + str(session['gold'])
-    return render_template("endgame.html")
+    session.pop('gold')
+    session.pop('count')
+    session.pop('log')
+    return redirect('/')
 
 
 
